@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded',() => {
   function createSad(){
     container.innerHTML += `<div class='frown' id='frown${i}' style='padding:0'><img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/sad.png'></div>`
   }
+  createSad()
 
   // console.log(frown.offsetLeft, frown.offsetTop)
   let randomDirection = ['top', 'bottom', 'left', 'right']
