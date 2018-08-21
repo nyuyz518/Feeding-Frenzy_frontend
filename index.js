@@ -10,13 +10,13 @@ document.addEventListener('DOMContentLoaded',() => {
   function createSad(x){
     container.innerHTML += "<div class='frown' id='frown" + i + "' style='padding-left:" + x + "px;'><img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/sad.png'></div>"
     i++
-    let face = document.getElementById(`frown${i}`)
 
-    
+
   }
 
   setInterval(function() {
-    container.innerHTML
+    //let face = document.querySelectorAll('.frown')
+    container.removeChild(container.childNodes[0])
     createSad(Math.floor(Math.random() *  (1000 - 50)))
   }, 1000)
 
