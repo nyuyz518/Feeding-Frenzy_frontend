@@ -5,10 +5,21 @@ document.addEventListener('DOMContentLoaded',() => {
   // })
   let i = 1
 
-  function createSad(){
-    container.innerHTML += `<div class='frown' id='frown'><img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/sad.png'></div>`
+
+  //createSad(x)
+  function createSad(x){
+    container.innerHTML += "<div class='frown' id='frown" + i + "' style='padding-left:" + x + "px;'><img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/sad.png'></div>"
+    i++
+    let face = document.getElementById(`frown${i}`)
+
+    
   }
-  createSad()
+
+  setInterval(function() {
+    container.innerHTML
+    createSad(Math.floor(Math.random() *  (1000 - 50)))
+  }, 1000)
+
 
   //
   // // console.log(frown.offsetLeft, frown.offsetTop)

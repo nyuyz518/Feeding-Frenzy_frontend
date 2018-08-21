@@ -9,31 +9,33 @@
   cursor: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/happy.png"), auto
 }
 
-#frown{
+.frown{
   height: 50px;
   width: 50px;
-  padding: 0px;
+  padding-right: 500px;
   animation-name: move-down;
-  animation-duration: 3s;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
 @keyframes move-down {
   from {padding-top: 0px;}
-  to {padding-top: 1000px;}
+  to {padding-top: 950px;}
 }
 
 @keyframes move-up {
   from {padding-bottom: 0px;}
-  top {padding-top: 1000px;}
+  top {padding-top: 950px;}
 }
 
 @keyframes move-left {
-  from {padding-right: 0px;}
-  top {padding-right: 1000px;}
+  from {padding-right: 50px;}
+  top {padding-right: 950;}
 }
 
 
 @keyframes move-right {
-  from {padding-left: 0px;}
-  top {padding-left: 1000px;}
+  from {padding-left: 50px;}
+  top {padding-left: 950;}
 }
