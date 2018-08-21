@@ -12,4 +12,28 @@
 #frown{
   height: 50px;
   width: 50px;
+  padding: 0px;
+  animation-name: move-down;
+  animation-duration: 3s;
+}
+
+@keyframes move-down {
+  from {padding-top: 0px;}
+  to {padding-top: 1000px;}
+}
+
+@keyframes move-up {
+  from {padding-bottom: 0px;}
+  top {padding-top: 1000px;}
+}
+
+@keyframes move-left {
+  from {padding-right: 0px;}
+  top {padding-right: 1000px;}
+}
+
+
+@keyframes move-right {
+  from {padding-left: 0px;}
+  top {padding-left: 1000px;}
 }
