@@ -3,6 +3,7 @@
   height: 650px;
   width: 1000px;
   z-index: 0;
+  position: relative;
 }
 
 #container:hover{
@@ -13,12 +14,13 @@
   height: 50px;
   width: 50px;
   padding-right: 500px;
-  animation-name: move-down;
+  /* animation-name: move-down;
   animation-duration: 2s;
   animation-iteration-count: infinite;
-  animation-timing-function: linear;
+  animation-timing-function: linear; */
+  position: absolute;
 }
-
+/*
 @keyframes move-down {
   from {padding-top: 0px;}
   to {padding-top: 600px;}
@@ -38,4 +40,4 @@
 @keyframes move-right {
   from {padding-left: 50px;}
   top {padding-left: 600px;}
-}
+} */

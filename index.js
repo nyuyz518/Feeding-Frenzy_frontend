@@ -3,15 +3,66 @@ document.addEventListener('DOMContentLoaded',() => {
   let i = 1
 
   function createSad(x){
-    container.innerHTML += "<div class='frown' id='frown" + i + "' style='padding-left:" + x + "px;'><img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/sad.png'></div>"
-    i++
+    const frown = document.createElement('div')
+    frown.className = "frown"
+    frown.innerHTML = "<img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/sad.png'>"
+    frown.style.left = `${x}px`
+    let top = 0
+    frown.style.top = `${top}px`
+
+    frown.addEventListener('mouseover', (e) => {
+      clearInterval(id)
+      container.innerHTML = ""
+      alert("YOU LOSE")
+      // frown.removeEventListener('mouseover', moveSad)
+    })
+
+    container.appendChild(frown)
+    // debugger
+      function moveSad() {
+        frown.style.top = `${top++}px`
+        //if (collision happens) {
+          //end game
+        //}
+
+        if (top < 600) {
+          window.requestAnimationFrame(moveSad)
+        } else {
+          frown.remove()
+        }
+      }
+    window.requestAnimationFrame(moveSad)
+    }
+
+
+
+
+
+
+
+  //   container.innerHTML += "<div class='frown' id='frown" + i + "' style='top: -50px; left: " + x + "px;'><img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/sad.png'></div>"
+  //   i++
+  // }
+
+
+  let id = setInterval(function() {
+    //remove child nodes was an attempt to remove face on interval
+    // container.removeChild(container.childNodes[0])
+    let rand = Math.floor(Math.random() *  (1000 - 50))
+
+    // clearInterval(id)
+    console.log(rand);
+    createSad(rand)
+    // let frowns = document.querySelectorAll('.frown')
+    // console.log(frowns)
+
+  }, 1000)
+
+  if(container.innerHTML == " "){
+    alert("YOU LOSE, YOU SUCK")
   }
 
-  setInterval(function() {
-    //remove child nodes was an attempt to remove face on interval
-    container.removeChild(container.childNodes[0])
-    createSad(Math.floor(Math.random() *  (1000 - 50)))
-  }, 1000)
+
 
 
   // // console.log(frown.offsetLeft, frown.offsetTop)
