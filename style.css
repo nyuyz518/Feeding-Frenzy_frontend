@@ -10,6 +10,10 @@
   cursor: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/happy.png"), auto
 }
 
+#show-scoreboard{
+  float: right;
+}
+
 .frown{
   height: 50px;
   width: 50px;
@@ -22,8 +26,9 @@
 }
 
 .food{
-  height: 30px;
-  width: 30px;
+  height: 50px;
+  width: 50px;
+  object-fit: scale-down;
   /* padding-right: 500px; */
   /* animation-name: move-down;
   animation-duration: 2s;

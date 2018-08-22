@@ -1,13 +1,101 @@
 document.addEventListener('DOMContentLoaded',() => {
   const container = document.getElementById('container')
+  const scoreBoard = document.getElementById('score-board')
   let i = 1
+  let score = 0
+
+  function showBoard(){
+    scoreBoard.innerHTML += `<li>SCORE: ${score}</li>`
+  }
 
   const directionArray = ['top', 'bottom', 'left', 'right']
 
-  function createFood(x, selectedDirection){
+  function createFood(x, create, selectedDirection){
+    if(2 < create){
+      return
+    }
+
     const food = document.createElement('div')
     food.className = "food"
-    food.innerHTML = "<p>🍔</p>"
+    food.innerHTML = "<img src='https://png2.kisspng.com/sh/f5e96958bdc5c28d7a39f833bae11997/L0KzQYm3U8I5N5R5fZH0aYP2gLBuTfNpbZZ4fdRAcnfogn7vgf1jfaNsfeQ2ZX3yerq0hB9wb51qRdpqbXL4grjskr02aZNnTtU9OHPmcra6Ur4xOWU9SKsANUG4QoO5U8I0QWM9S6oBLoDxd1==/kisspng-cheeseburger-hamburger-emoji-google-hamburger-5abb6c48ccbe32.0148095515222323928386.png' style='height:30px; width:30px'>"
+
+
+    let top = 0
+    container.appendChild(food)
+
+    if(selectedDirection == 'top'){
+      food.style.left = `${x}px`
+      food.style.top = `${top}px`
+      window.requestAnimationFrame(moveDown)
+    }else if(selectedDirection == 'right'){
+      x = x%600
+      food.style.top = `${x}px`
+      food.style.right = `${top}px`
+      window.requestAnimationFrame(moveLeft)
+    }else if(selectedDirection == 'bottom'){
+      food.style.right = `${x}px`
+      food.style.bottom = `${top}px`
+      window.requestAnimationFrame(moveUp)
+    }else if(selectedDirection == 'left'){
+      x = x%600
+      food.style.bottom = `${x}px`
+      food.style.right = `${top}px`
+      window.requestAnimationFrame(moveRight)
+    }
+
+    food.addEventListener('mouseover', (e) => {
+      food.remove()
+      score += 10
+      // frown.removeEventListener('mouseover', moveSad)
+    })
+
+      function moveDown(){
+        if(selectedDirection == 'top'){
+          top += 2
+          food.style.top = `${top}px`
+        }
+        if (top < 600) {
+            window.requestAnimationFrame(moveDown)
+          } else {
+            food.remove()
+        }
+      }
+
+      function moveUp(){
+        if(selectedDirection == 'bottom'){
+          top += 2
+          food.style.bottom = `${top}px`
+        }
+        if (top < 600) {
+            window.requestAnimationFrame(moveUp)
+          } else {
+            food.remove()
+        }
+      }
+
+      function moveRight(){
+        if(selectedDirection == 'left'){
+          top += 2
+          food.style.left = `${top}px`
+        }
+        if (top < 950) {
+            window.requestAnimationFrame(moveRight)
+          } else {
+            food.remove()
+        }
+      }
+
+      function moveLeft(){
+        if(selectedDirection == 'right'){
+          top+=2
+          food.style.right = `${top}px`
+        }
+        if (top < 950) {
+            window.requestAnimationFrame(moveLeft)
+          } else {
+            food.remove()
+        }
+      }
   }
 
   function createSad(x, selectedDirection){
@@ -27,7 +115,8 @@ document.addEventListener('DOMContentLoaded',() => {
     frown.addEventListener('mouseover', (e) => {
       clearInterval(id)
       container.innerHTML = ""
-      alert("YOU LOSE you lasted" + counter + " seconds")
+      showBoard()
+      alert("YOU LOSE YOUR SCORE IS " + score)
       // frown.removeEventListener('mouseover', moveSad)
     })
 
@@ -53,7 +142,8 @@ document.addEventListener('DOMContentLoaded',() => {
 
       function moveDown(){
         if(direction == 'top'){
-          frown.style.top = `${top++}px`
+          top+=5
+          frown.style.top = `${top}px`
         }
         if (top < 600) {
             window.requestAnimationFrame(moveDown)
@@ -64,7 +154,8 @@ document.addEventListener('DOMContentLoaded',() => {
 
       function moveUp(){
         if(direction == 'bottom'){
-          frown.style.bottom = `${top++}px`
+          top+=5
+          frown.style.bottom = `${top}px`
         }
         if (top < 600) {
             window.requestAnimationFrame(moveUp)
@@ -75,7 +166,8 @@ document.addEventListener('DOMContentLoaded',() => {
 
       function moveRight(){
         if(direction == 'left'){
-            frown.style.left = `${top++}px`
+            top+=5
+            frown.style.left = `${top}px`
           }
         if (top < 950) {
             window.requestAnimationFrame(moveRight)
@@ -86,7 +178,8 @@ document.addEventListener('DOMContentLoaded',() => {
 
       function moveLeft(){
         if(direction == 'right'){
-          frown.style.right = `${top++}px`
+          top+=5
+          frown.style.right = `${top}px`
         }
         if (top < 950) {
             window.requestAnimationFrame(moveLeft)
@@ -114,15 +207,21 @@ document.addEventListener('DOMContentLoaded',() => {
       // container.removeChild(container.childNodes[0])
       let randomInt = Math.floor(Math.random()*directionArray.length)
       let selectedDirection = directionArray[randomInt]
-      console.log(selectedDirection)
+      // console.log(selectedDirection)
       let randSpawn = Math.floor(Math.random()*(1000 - 50))
       createSad(randSpawn, selectedDirection)
+
+
+      let randomInt2 = Math.floor(Math.random()*directionArray.length)
+      let selectedDirection2 = directionArray[randomInt2]
+
+      let randFood = Math.floor(Math.random()*(1000 - 30))
+      let chanceMake = Math.floor(Math.random()*10)
+      createFood(randFood, chanceMake, selectedDirection2)
       // let frowns = document.querySelectorAll('.frown')
       // console.log(frowns)
       counter++
-    }, 1000)
-
-
+    }, 500)
 
 
   // // console.log(frown.offsetLeft, frown.offsetTop)
