@@ -13,7 +13,18 @@
 .frown{
   height: 50px;
   width: 50px;
-  padding-right: 500px;
+  /* padding-right: 500px; */
+  /* animation-name: move-down;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; */
+  position: absolute;
+}
+
+.food{
+  height: 30px;
+  width: 30px;
+  /* padding-right: 500px; */
   /* animation-name: move-down;
   animation-duration: 2s;
   animation-iteration-count: infinite;
