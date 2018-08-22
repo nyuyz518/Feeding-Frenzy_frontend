@@ -3,16 +3,21 @@ document.addEventListener('DOMContentLoaded',() => {
   const scoreBoard = document.getElementById('score-board')
   const start = document.getElementById('play')
   const input = document.getElementById('user')
+  const userInput = document.getElementById('user-input')
   const submitButton = document.getElementById('submit-button')
   start.style.display = "none"
 
   let i = 1
   let score = 0
-
+  let userName = ""
+  //"jermaine"
+  // input.querySelector('input').value
   function setUser(){
     start.style.display = ""
     fetch('http://localhost:3000/api/v1/users', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({"name": input.querySelector('input').value})})
+    userName = input.querySelector('input').value
     input.querySelector('input').value = ""
+    // console.log(userName)
   }
 
 
@@ -23,7 +28,7 @@ document.addEventListener('DOMContentLoaded',() => {
 
 
   function showBoard(){
-    scoreBoard.innerHTML += `<li>SCORE: ${score}</li>`
+    scoreBoard.innerHTML += `<li>${userName}: ${score}</li>`
   }
 
   const directionArray = ['top', 'bottom', 'left', 'right']
@@ -130,7 +135,8 @@ document.addEventListener('DOMContentLoaded',() => {
   start.addEventListener('click', newGame)
 
   function newGame(){
-    userForm.style.display = 'none'
+    // console.log("AHHHHHHHHHHHHHHHHHHHH")
+    input.style.display = 'none'
     start.style.display = 'none'
 
     function createSad(x, selectedDirection){
@@ -151,12 +157,12 @@ document.addEventListener('DOMContentLoaded',() => {
         clearInterval(id)
         container.innerHTML = ""
         start.style.display = ''
-        userForm.style.display = ''
+        input.style.display = ''
         showBoard()
         if(score < 200){
-          alert("LOL AMATEUR")
+          alert(userName + " IS TRASH LOL AMATEUR")
         }else{
-          alert("YOUR SCORE IS " + score)
+          alert(userName + "'s SCORE IS " + score)
         }
         // frown.removeEventListener('mouseover', moveSad)
       })
