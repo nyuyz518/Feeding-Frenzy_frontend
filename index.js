@@ -1,9 +1,26 @@
 document.addEventListener('DOMContentLoaded',() => {
   const container = document.getElementById('container')
   const scoreBoard = document.getElementById('score-board')
+  const start = document.getElementById('play')
+  const input = document.getElementById('user')
+  const submitButton = document.getElementById('submit-button')
+  start.style.display = "none"
 
   let i = 1
   let score = 0
+
+  function setUser(){
+    start.style.display = ""
+    fetch('http://localhost:3000/api/v1/users', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({"name": input.querySelector('input').value})})
+    input.querySelector('input').value = ""
+  }
+
+
+  submitButton.addEventListener('click', (e) => {
+    e.preventDefault()
+    setUser()
+  })
+
 
   function showBoard(){
     scoreBoard.innerHTML += `<li>SCORE: ${score}</li>`
@@ -99,102 +116,6 @@ document.addEventListener('DOMContentLoaded',() => {
       }
   }
 
-  function createSad(x, selectedDirection){
-    let direction = selectedDirection
-    const frown = document.createElement('div')
-    console.log(selectedDirection)
-    frown.className = "frown"
-    frown.innerHTML = "<img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/sad.png'>"
-    // debugger
-    let top = 0
-    // console.log("this is top")
-    // frown.style.left = `${x}px`
-    // let top = 0
-    // frown.style.top = `${top}px`
-    // debugger
-    container.appendChild(frown)
-    frown.addEventListener('mouseover', (e) => {
-      clearInterval(id)
-      container.innerHTML = ""
-      showBoard()
-      if(score < 200){
-        alert("LOL AMATEUR")
-      }else{
-        alert("YOUR SCORE IS " + score)
-      }
-      // frown.removeEventListener('mouseover', moveSad)
-    })
-
-    if(selectedDirection == 'top'){
-      frown.style.left = `${x}px`
-      frown.style.top = `${top}px`
-      window.requestAnimationFrame(moveDown)
-    }else if(selectedDirection == 'right'){
-      x = x%600
-      frown.style.top = `${x}px`
-      frown.style.right = `${top}px`
-      window.requestAnimationFrame(moveLeft)
-    }else if(selectedDirection == 'bottom'){
-      frown.style.right = `${x}px`
-      frown.style.bottom = `${top}px`
-      window.requestAnimationFrame(moveUp)
-    }else if(selectedDirection == 'left'){
-      x = x%600
-      frown.style.bottom = `${x}px`
-      frown.style.right = `${top}px`
-      window.requestAnimationFrame(moveRight)
-    }
-
-      function moveDown(){
-        if(direction == 'top'){
-          top+=5
-          frown.style.top = `${top}px`
-        }
-        if (top < 600) {
-            window.requestAnimationFrame(moveDown)
-          } else {
-            frown.remove()
-        }
-      }
-
-      function moveUp(){
-        if(direction == 'bottom'){
-          top+=5
-          frown.style.bottom = `${top}px`
-        }
-        if (top < 600) {
-            window.requestAnimationFrame(moveUp)
-          } else {
-            frown.remove()
-        }
-      }
-
-      function moveRight(){
-        if(direction == 'left'){
-            top+=5
-            frown.style.left = `${top}px`
-          }
-        if (top < 950) {
-            window.requestAnimationFrame(moveRight)
-          } else {
-            frown.remove()
-        }
-      }
-
-      function moveLeft(){
-        if(direction == 'right'){
-          top+=5
-          frown.style.right = `${top}px`
-        }
-        if (top < 950) {
-            window.requestAnimationFrame(moveLeft)
-          } else {
-            frown.remove()
-        }
-      }
-
-    //collision
-    }
 
 
 
@@ -206,28 +127,132 @@ document.addEventListener('DOMContentLoaded',() => {
   //   i++
   // }
 
+  start.addEventListener('click', newGame)
 
-  let counter = 0
-    let id = setInterval(function() {
-      // container.removeChild(container.childNodes[0])
-      let randomInt = Math.floor(Math.random()*directionArray.length)
-      let selectedDirection = directionArray[randomInt]
-      // console.log(selectedDirection)
-      let randSpawn = Math.floor(Math.random()*(1000 - 50))
-      createSad(randSpawn, selectedDirection)
+  function newGame(){
+    userForm.style.display = 'none'
+    start.style.display = 'none'
+
+    function createSad(x, selectedDirection){
+      let direction = selectedDirection
+      const frown = document.createElement('div')
+      console.log(selectedDirection)
+      frown.className = "frown"
+      frown.innerHTML = "<img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/sad.png'>"
+      // debugger
+      let top = 0
+      // console.log("this is top")
+      // frown.style.left = `${x}px`
+      // let top = 0
+      // frown.style.top = `${top}px`
+      // debugger
+      container.appendChild(frown)
+      frown.addEventListener('mouseover', (e) => {
+        clearInterval(id)
+        container.innerHTML = ""
+        start.style.display = ''
+        userForm.style.display = ''
+        showBoard()
+        if(score < 200){
+          alert("LOL AMATEUR")
+        }else{
+          alert("YOUR SCORE IS " + score)
+        }
+        // frown.removeEventListener('mouseover', moveSad)
+      })
+
+      if(selectedDirection == 'top'){
+        frown.style.left = `${x}px`
+        frown.style.top = `${top}px`
+        window.requestAnimationFrame(moveDown)
+      }else if(selectedDirection == 'right'){
+        x = x%600
+        frown.style.top = `${x}px`
+        frown.style.right = `${top}px`
+        window.requestAnimationFrame(moveLeft)
+      }else if(selectedDirection == 'bottom'){
+        frown.style.right = `${x}px`
+        frown.style.bottom = `${top}px`
+        window.requestAnimationFrame(moveUp)
+      }else if(selectedDirection == 'left'){
+        x = x%600
+        frown.style.bottom = `${x}px`
+        frown.style.right = `${top}px`
+        window.requestAnimationFrame(moveRight)
+      }
+
+        function moveDown(){
+          if(direction == 'top'){
+            top+=5
+            frown.style.top = `${top}px`
+          }
+          if (top < 600) {
+              window.requestAnimationFrame(moveDown)
+            } else {
+              frown.remove()
+          }
+        }
+
+        function moveUp(){
+          if(direction == 'bottom'){
+            top+=5
+            frown.style.bottom = `${top}px`
+          }
+          if (top < 600) {
+              window.requestAnimationFrame(moveUp)
+            } else {
+              frown.remove()
+          }
+        }
+
+        function moveRight(){
+          if(direction == 'left'){
+              top+=5
+              frown.style.left = `${top}px`
+            }
+          if (top < 950) {
+              window.requestAnimationFrame(moveRight)
+            } else {
+              frown.remove()
+          }
+        }
+
+        function moveLeft(){
+          if(direction == 'right'){
+            top+=5
+            frown.style.right = `${top}px`
+          }
+          if (top < 950) {
+              window.requestAnimationFrame(moveLeft)
+            } else {
+              frown.remove()
+          }
+        }
+
+      //collision
+      }
+
+    let counter = 0
+      let id = setInterval(function() {
+        // container.removeChild(container.childNodes[0])
+        let randomInt = Math.floor(Math.random()*directionArray.length)
+        let selectedDirection = directionArray[randomInt]
+        // console.log(selectedDirection)
+        let randSpawn = Math.floor(Math.random()*(1000 - 50))
+        createSad(randSpawn, selectedDirection)
 
 
-      let randomInt2 = Math.floor(Math.random()*directionArray.length)
-      let selectedDirection2 = directionArray[randomInt2]
+        let randomInt2 = Math.floor(Math.random()*directionArray.length)
+        let selectedDirection2 = directionArray[randomInt2]
 
-      let randFood = Math.floor(Math.random()*(1000 - 30))
-      let chanceMake = Math.floor(Math.random()*10)
-      createFood(randFood, chanceMake, selectedDirection2)
-      // let frowns = document.querySelectorAll('.frown')
-      // console.log(frowns)
-      counter++
-    }, 250)
-
+        let randFood = Math.floor(Math.random()*(1000 - 30))
+        let chanceMake = Math.floor(Math.random()*10)
+        createFood(randFood, chanceMake, selectedDirection2)
+        // let frowns = document.querySelectorAll('.frown')
+        // console.log(frowns)
+        counter++
+      }, 250)
+  }
 
   // // console.log(frown.offsetLeft, frown.offsetTop)
   //

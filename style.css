@@ -4,6 +4,7 @@
   width: 1000px;
   z-index: 0;
   position: relative;
+  display: block;
 }
 
 #container:hover{
@@ -12,6 +13,16 @@
 
 #show-scoreboard{
   float: right;
+  top: 1em;
+  right: 1em;
+  position: fixed;
+}
+
+#play{
+  float: right;
+  top: 1em;
+  right: 1em;
+  position: fixed;
 }
 
 .frown{
@@ -35,6 +46,11 @@
   animation-iteration-count: infinite;
   animation-timing-function: linear; */
   position: absolute;
+}
+
+#user{
+  margin-top: 20px;
+
 }
 /*
 @keyframes move-down {
