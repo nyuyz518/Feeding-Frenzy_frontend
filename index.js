@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded',() => {
   const container = document.getElementById('container')
   const scoreBoard = document.getElementById('score-board')
+
   let i = 1
   let score = 0
 
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded',() => {
 
     const food = document.createElement('div')
     food.className = "food"
-    food.innerHTML = "<img src='https://png2.kisspng.com/sh/f5e96958bdc5c28d7a39f833bae11997/L0KzQYm3U8I5N5R5fZH0aYP2gLBuTfNpbZZ4fdRAcnfogn7vgf1jfaNsfeQ2ZX3yerq0hB9wb51qRdpqbXL4grjskr02aZNnTtU9OHPmcra6Ur4xOWU9SKsANUG4QoO5U8I0QWM9S6oBLoDxd1==/kisspng-cheeseburger-hamburger-emoji-google-hamburger-5abb6c48ccbe32.0148095515222323928386.png' style='height:30px; width:30px'>"
+    food.innerHTML = "<img src='image/burger.png' style='height:30px; width:30px'>"
 
 
     let top = 0
@@ -116,7 +117,11 @@ document.addEventListener('DOMContentLoaded',() => {
       clearInterval(id)
       container.innerHTML = ""
       showBoard()
-      alert("YOU LOSE YOUR SCORE IS " + score)
+      if(score < 200){
+        alert("LOL AMATEUR")
+      }else{
+        alert("YOUR SCORE IS " + score)
+      }
       // frown.removeEventListener('mouseover', moveSad)
     })
 
@@ -221,7 +226,7 @@ document.addEventListener('DOMContentLoaded',() => {
       // let frowns = document.querySelectorAll('.frown')
       // console.log(frowns)
       counter++
-    }, 500)
+    }, 250)
 
 
   // // console.log(frown.offsetLeft, frown.offsetTop)
