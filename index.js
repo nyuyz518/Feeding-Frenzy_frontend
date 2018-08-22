@@ -1,27 +1,19 @@
 document.addEventListener('DOMContentLoaded',() => {
   const container = document.getElementById('container')
-  // canvas.addEventListener('mousemove', (e) => {
-  //   console.log('x', e.clientX, 'y', e.clientY)
-  // })
   let i = 1
 
-
-  //createSad(x)
   function createSad(x){
     container.innerHTML += "<div class='frown' id='frown" + i + "' style='padding-left:" + x + "px;'><img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/sad.png'></div>"
     i++
-
-
   }
 
   setInterval(function() {
-    //let face = document.querySelectorAll('.frown')
+    //remove child nodes was an attempt to remove face on interval
     container.removeChild(container.childNodes[0])
     createSad(Math.floor(Math.random() *  (1000 - 50)))
   }, 1000)
 
 
-  //
   // // console.log(frown.offsetLeft, frown.offsetTop)
   // let randomDirection = ['top', 'bottom', 'left', 'right']
   //
