@@ -2,14 +2,23 @@ document.addEventListener('DOMContentLoaded',() => {
   const container = document.getElementById('container')
   let i = 1
 
-  function createSad(x){
+  const directionArray = ['top', 'bottom', 'left', 'right']
+
+  function createSad(x, selectedDirection){
+    let direction = selectedDirection
     const frown = document.createElement('div')
+    console.log(selectedDirection)
     frown.className = "frown"
     frown.innerHTML = "<img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/sad.png'>"
-    frown.style.left = `${x}px`
+    // debugger
     let top = 0
-    frown.style.top = `${top}px`
+    // console.log("this is top")
+    // frown.style.left = `${x}px`
+    // let top = 0
+    // frown.style.top = `${top}px`
 
+    // debugger
+    container.appendChild(frown)
     frown.addEventListener('mouseover', (e) => {
       clearInterval(id)
       container.innerHTML = ""
@@ -17,21 +26,71 @@ document.addEventListener('DOMContentLoaded',() => {
       // frown.removeEventListener('mouseover', moveSad)
     })
 
-    container.appendChild(frown)
-    // debugger
-      function moveSad() {
-        frown.style.top = `${top++}px`
-        //if (collision happens) {
-          //end game
-        //}
+    if(selectedDirection == 'top'){
+      frown.style.left = `${x}px`
+      frown.style.top = `${top}px`
+      window.requestAnimationFrame(moveDown)
+    }else if(selectedDirection == 'right'){
+      x = x%650
+      frown.style.top = `${x}px`
+      frown.style.right = `${top}px`
+      window.requestAnimationFrame(moveLeft)
+    }else if(selectedDirection == 'bottom'){
+      frown.style.right = `${x}px`
+      frown.style.bottom = `${top}px`
+      window.requestAnimationFrame(moveUp)
+    }else if(selectedDirection == 'left'){
+      x = x%650
+      frown.style.bottom = `${x}px`
+      frown.style.right = `${top}px`
+      window.requestAnimationFrame(moveRight)
+    }
 
+      function moveDown(){
+        if(direction == 'top'){
+          frown.style.top = `${top++}px`
+        }
         if (top < 600) {
-          window.requestAnimationFrame(moveSad)
-        } else {
-          frown.remove()
+            window.requestAnimationFrame(moveDown)
+          } else {
+            frown.remove()
         }
       }
-    window.requestAnimationFrame(moveSad)
+
+      function moveUp(){
+        if(direction == 'bottom'){
+          frown.style.bottom = `${top++}px`
+        }
+        if (top < 600) {
+            window.requestAnimationFrame(moveUp)
+          } else {
+            frown.remove()
+        }
+      }
+
+      function moveRight(){
+        if(direction == 'left'){
+            frown.style.left = `${top++}px`
+          }
+        if (top < 600) {
+            window.requestAnimationFrame(moveRight)
+          } else {
+            frown.remove()
+        }
+      }
+
+      function moveLeft(){
+        if(direction == 'right'){
+          frown.style.right = `${top++}px`
+        }
+        if (top < 600) {
+            window.requestAnimationFrame(moveLeft)
+          } else {
+            frown.remove()
+        }
+      }
+
+    //collision
     }
 
 
@@ -45,29 +104,22 @@ document.addEventListener('DOMContentLoaded',() => {
   // }
 
 
-  let id = setInterval(function() {
-    //remove child nodes was an attempt to remove face on interval
-    // container.removeChild(container.childNodes[0])
-    let rand = Math.floor(Math.random() *  (1000 - 50))
+    let id = setInterval(function() {
+      // container.removeChild(container.childNodes[0])
+      let randomInt = Math.floor(Math.random()*directionArray.length)
+      let selectedDirection = directionArray[randomInt]
+      console.log(selectedDirection)
+      let randSpawn = Math.floor(Math.random()*(1000 - 50))
+      createSad(randSpawn, selectedDirection)
+      // let frowns = document.querySelectorAll('.frown')
+      // console.log(frowns)
 
-    // clearInterval(id)
-    console.log(rand);
-    createSad(rand)
-    // let frowns = document.querySelectorAll('.frown')
-    // console.log(frowns)
-
-  }, 1000)
-
-  if(container.innerHTML == " "){
-    alert("YOU LOSE, YOU SUCK")
-  }
+    }, 1000)
 
 
 
 
   // // console.log(frown.offsetLeft, frown.offsetTop)
-  // let randomDirection = ['top', 'bottom', 'left', 'right']
-  //
   //
   // //need to create element at that point
   // setInterval(() => {

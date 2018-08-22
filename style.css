@@ -13,7 +13,8 @@
 .frown{
   height: 50px;
   width: 50px;
-  padding-right: 500px;
+  /* padding-right: 500px;
+  padding-left: 300px; */
   /* animation-name: move-down;
   animation-duration: 2s;
   animation-iteration-count: infinite;
