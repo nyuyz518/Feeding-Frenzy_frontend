@@ -4,6 +4,12 @@ document.addEventListener('DOMContentLoaded',() => {
 
   const directionArray = ['top', 'bottom', 'left', 'right']
 
+  function createFood(x, selectedDirection){
+    const food = document.createElement('div')
+    food.className = "food"
+    food.innerHTML = "<p>🍔</p>"
+  }
+
   function createSad(x, selectedDirection){
     let direction = selectedDirection
     const frown = document.createElement('div')
