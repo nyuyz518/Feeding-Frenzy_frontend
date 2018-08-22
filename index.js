@@ -16,13 +16,12 @@ document.addEventListener('DOMContentLoaded',() => {
     // frown.style.left = `${x}px`
     // let top = 0
     // frown.style.top = `${top}px`
-
     // debugger
     container.appendChild(frown)
     frown.addEventListener('mouseover', (e) => {
       clearInterval(id)
       container.innerHTML = ""
-      alert("YOU LOSE")
+      alert("YOU LOSE you lasted" + counter + " seconds")
       // frown.removeEventListener('mouseover', moveSad)
     })
 
@@ -31,7 +30,7 @@ document.addEventListener('DOMContentLoaded',() => {
       frown.style.top = `${top}px`
       window.requestAnimationFrame(moveDown)
     }else if(selectedDirection == 'right'){
-      x = x%650
+      x = x%600
       frown.style.top = `${x}px`
       frown.style.right = `${top}px`
       window.requestAnimationFrame(moveLeft)
@@ -40,7 +39,7 @@ document.addEventListener('DOMContentLoaded',() => {
       frown.style.bottom = `${top}px`
       window.requestAnimationFrame(moveUp)
     }else if(selectedDirection == 'left'){
-      x = x%650
+      x = x%600
       frown.style.bottom = `${x}px`
       frown.style.right = `${top}px`
       window.requestAnimationFrame(moveRight)
@@ -72,7 +71,7 @@ document.addEventListener('DOMContentLoaded',() => {
         if(direction == 'left'){
             frown.style.left = `${top++}px`
           }
-        if (top < 600) {
+        if (top < 950) {
             window.requestAnimationFrame(moveRight)
           } else {
             frown.remove()
@@ -83,7 +82,7 @@ document.addEventListener('DOMContentLoaded',() => {
         if(direction == 'right'){
           frown.style.right = `${top++}px`
         }
-        if (top < 600) {
+        if (top < 950) {
             window.requestAnimationFrame(moveLeft)
           } else {
             frown.remove()
@@ -104,6 +103,7 @@ document.addEventListener('DOMContentLoaded',() => {
   // }
 
 
+  let counter = 0
     let id = setInterval(function() {
       // container.removeChild(container.childNodes[0])
       let randomInt = Math.floor(Math.random()*directionArray.length)
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded',() => {
       createSad(randSpawn, selectedDirection)
       // let frowns = document.querySelectorAll('.frown')
       // console.log(frowns)
-
+      counter++
     }, 1000)
 
 
