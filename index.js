@@ -72,6 +72,8 @@ document.addEventListener('DOMContentLoaded',() => {
     }
 
     food.addEventListener('mouseover', (e) => {
+      let chomp = new Audio('audio/animals_dog_eat_bone_short.mp3')
+      chomp.play()
       food.remove()
       score += 10
       // frown.removeEventListener('mouseover', moveSad)
@@ -264,40 +266,4 @@ document.addEventListener('DOMContentLoaded',() => {
         counter++
       }, 250)
   }
-
-  // // console.log(frown.offsetLeft, frown.offsetTop)
-  //
-  // //need to create element at that point
-  // setInterval(() => {
-  //   let randomInt = Math.floor(Math.random()*randomDirection.length)
-  //   const selectedDirection = randomDirection[randomInt]
-  //   createSad()
-  //   myMove(selectedDirection)
-  // }, 2000)
-  //
-  // // inputting left will move right etc.
-  // function myMove(direction) {
-  //   let pos = 0
-  //   this.direction = direction.toUpperCase()
-  //   let frown = document.getElementById(`frown${i}`)
-  //   i++
-  //   let id = setInterval(() => {
-  //     if (pos === 800) {
-  //       clearInterval(id)
-  //       container.innerHTML = ''
-  //     } else {
-  //       pos++
-  //       if(this.direction.toLowerCase() === "right"){
-  //         frown.style.paddingRight = pos + 'px'
-  //       }else if (this.direction.toLowerCase() === "left"){
-  //         frown.style.paddingLeft = pos + 'px'
-  //       }else if(this.direction.toLowerCase() === "bottom"){
-  //         frown.style.paddingBottom = pos + 'px'
-  //       }else if(this.direction.toLowerCase() === "top"){
-  //         frown.style.paddingTop = pos + 'px'
-  //       }
-  //     }
-  //   }, 1)
-  // }
-
 })
