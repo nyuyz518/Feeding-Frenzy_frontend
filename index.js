@@ -13,11 +13,16 @@ document.addEventListener('DOMContentLoaded',() => {
   //"jermaine"
   // input.querySelector('input').value
   function setUser(){
-    start.style.display = ""
-    fetch('http://localhost:3000/api/v1/users', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({"name": input.querySelector('input').value})})
-    userName = input.querySelector('input').value
-    input.querySelector('input').value = ""
-    // console.log(userName)
+    if(!userInput.value){
+      console.log(userInput.value)
+      alert("User name cant be empty!")
+    } else {
+      start.style.display = ""
+      fetch('http://localhost:3000/api/v1/users', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({"name": input.querySelector('input').value})})
+      userName = input.querySelector('input').value
+      input.querySelector('input').value = ""
+      // console.log(userName)
+    }
   }
 
 
