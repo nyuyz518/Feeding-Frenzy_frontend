@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded',() => {
         input.style.display = ''
         showBoard()
         if(score < 200){
-          alert(userName + ", LOL AMATEUR")
+          alert(userName + ", LOL AMATEUR!!!")
         }else{
           alert(userName + "'s SCORE IS " + score)
         }
