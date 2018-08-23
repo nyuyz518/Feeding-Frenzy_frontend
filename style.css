@@ -12,7 +12,7 @@
 }
 
 #container:hover{
-  background:lightpink;
+  /* background:lightpink; */
   cursor: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/happy.png"), auto
 }
 

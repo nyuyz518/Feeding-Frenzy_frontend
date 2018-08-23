@@ -10,26 +10,16 @@ document.addEventListener('DOMContentLoaded',() => {
   let i = 1
   let score = 0
   let userName = ""
-  //"jermaine"
-  // input.querySelector('input').value
-  scoreBoard.style.display = "none"
 
-  //rearranges the scores doesnt work doe
-  // function rearrangeScores(){
-  //   debugger
-  //   scoreBoard.querySelectorAll('.user-score').sort((a,b) => (b-a))
-  // }
+  scoreBoard.style.display = "none"
 
   function setUser(){
     if(!userInput.value){
-      console.log(userInput.value)
       alert("User name cant be empty!")
     } else {
       start.style.display = ""
-      fetch('http://localhost:3000/api/v1/users', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({"name": input.querySelector('input').value})})
-      userName = input.querySelector('input').value
-      input.querySelector('input').value = ""
-      // console.log(userName)
+      let userName = userInput.value
+      userInput.value = ''
     }
   }
 
@@ -175,7 +165,15 @@ document.addEventListener('DOMContentLoaded',() => {
         }else{
           alert(userName + "'s SCORE IS " + score)
         }
-        score = 0
+        fetch('http://localhost:3000/api/v1/games', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            "score": score,
+            "user_id": 3
+          })
+        })
+        // score = 0
       })
 
       if(selectedDirection == 'top'){
