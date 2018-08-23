@@ -149,6 +149,15 @@ document.addEventListener('DOMContentLoaded',() => {
       console.log(selectedDirection)
       frown.className = "frown"
       frown.innerHTML = "<img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/sad.png'>"
+      setInterval(() => {
+        if(frown.querySelector('img').src == 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/sad.png'){
+          frown.querySelector('img').src = 'image/cry.png'
+          frown.querySelector('img').style.height = '50px'
+          frown.querySelector('img').style.width = '50px'
+        }else{
+          frown.querySelector('img').src = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/sad.png'
+        }
+      }, 700)
       // debugger
       let top = 0
 
