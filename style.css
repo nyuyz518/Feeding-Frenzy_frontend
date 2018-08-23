@@ -61,6 +61,9 @@ li {
   text-align: left;
 }
 
+#score-board{
+  align-items: center;
+}
 /*
 @keyframes move-down {
   from {padding-top: 0px;}
