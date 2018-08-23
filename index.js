@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded',() => {
 
       function moveDown(){
         if(selectedDirection == 'top'){
-          top += 2
+          top += 7
           food.style.top = `${top}px`
         }
         if (top < 600) {
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded',() => {
 
       function moveUp(){
         if(selectedDirection == 'bottom'){
-          top += 2
+          top += 7
           food.style.bottom = `${top}px`
         }
         if (top < 600) {
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded',() => {
 
       function moveRight(){
         if(selectedDirection == 'left'){
-          top += 2
+          top += 7
           food.style.left = `${top}px`
         }
         if (top < 950) {
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded',() => {
 
       function moveLeft(){
         if(selectedDirection == 'right'){
-          top+=2
+          top+=7
           food.style.right = `${top}px`
         }
         if (top < 950) {
