@@ -16,9 +16,8 @@
 
 #logo{
   box-shadow: 0px 0px 2px 3px #0ff;
-  width: 120;
-  height: 110px;
-  margin-top: 10px;
+  height:120px;
+  width:190px
 }
 
 #show-scoreboard{
@@ -29,11 +28,7 @@
 }
 
 #play{
-  float: right;
-  top: 1em;
-  right: 1em;
-  position: fixed;
-  margin-bottom: 20px;
+  float: center;
 }
 
 .frown{
@@ -61,7 +56,6 @@
 
 #user{
   margin-top: 20px;
-  margin-right: 20px;
 }
 li {
   text-align: left;

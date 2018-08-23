@@ -5,7 +5,11 @@ document.addEventListener('DOMContentLoaded',() => {
   const input = document.getElementById('user')
   const userInput = document.getElementById('user-input')
   const submitButton = document.getElementById('submit-button')
+  const existingUsers = document.getElementById("existing-users")
+  const existingUsersBtn = document.getElementById("existing-users-button")
+
   start.style.display = "none"
+
   let score = 0
   let userName = ""
 
@@ -13,7 +17,14 @@ document.addEventListener('DOMContentLoaded',() => {
   userInput.style.display = ''
   submitButton.style.display = ''
 
-  function setUser(){
+  fetch("http://localhost:3000/api/v1/users").then(r=>r.json()).then(getUser)
+    function getUser(data){
+      data.forEach(user => {
+        existingUsers.innerHTML += `<option id="${user.id}"> ${user.name} </option>`
+      })
+    }
+
+  function setNewUser(){
     if(!userInput.value){
       alert("User name cant be empty!")
     } else {
@@ -21,16 +32,27 @@ document.addEventListener('DOMContentLoaded',() => {
       userName = userInput.value
       userInput.style.display = 'none'
       submitButton.style.display = 'none'
+      existingUsers.style.display = 'none'
+      existingUsersBtn.style.display = 'none'
     }
     userInput.value = ''
   }
 
+  function setExistingUser(){
+    start.style.display = ""
+    userName = existingUsers.value
+    userInput.style.display = 'none'
+    submitButton.style.display = 'none'
+    existingUsers.style.display = 'none'
+    existingUsersBtn.style.display = 'none'
+  }
 
   submitButton.addEventListener('click', (e) => {
     e.preventDefault()
-    setUser()
+    setNewUser()
   })
 
+  existingUsersBtn.addEventListener('click', () => setExistingUser())
 
   function showBoard(){
     scoreBoard.innerHTML += `<li class="user-score">${userName}'s score: ${score}</li>`
@@ -167,13 +189,39 @@ document.addEventListener('DOMContentLoaded',() => {
         }else{
           alert(userName + "'s SCORE IS " + score)
         }
-        fetch('http://localhost:3000/api/v1/games', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            "score": score,
-            "user_id": 3
-          })
+        fetch("http://localhost:3000/api/v1/users")
+        .then(r=>r.json())
+        .then(data => {
+          let user = data.find(user => userName === user.name)
+          if (!user) {
+            fetch('http://localhost:3000/api/v1/users', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({
+                "name": userName
+              })
+            })
+            .then(r => r.json())
+            .then(json => {
+              fetch('http://localhost:3000/api/v1/games', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                  "score": score,
+                  "user_id": json.id
+                })
+              })
+            })
+          } else {
+            fetch('http://localhost:3000/api/v1/games', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({
+                "score": score,
+                "user_id": user.id
+              })
+            })
+          }
         })
       })
 
