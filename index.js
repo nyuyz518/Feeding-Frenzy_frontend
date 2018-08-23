@@ -244,8 +244,6 @@ document.addEventListener('DOMContentLoaded',() => {
               frown.remove()
           }
         }
-
-      //collision
       }
 
     let counter = 0
