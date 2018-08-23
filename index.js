@@ -18,9 +18,9 @@ document.addEventListener('DOMContentLoaded',() => {
       alert("User name cant be empty!")
     } else {
       start.style.display = ""
-      let userName = userInput.value
-      userInput.value = ''
+      userName = userInput.value
     }
+    userInput.value = ''
   }
 
 
