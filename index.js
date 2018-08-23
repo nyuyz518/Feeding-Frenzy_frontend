@@ -193,7 +193,6 @@ document.addEventListener('DOMContentLoaded',() => {
         .then(r=>r.json())
         .then(data => {
           let user = data.find(user => userName === user.name)
-          // debugger
           if (!user) {
             fetch('http://localhost:3000/api/v1/users', {
               method: 'POST',
