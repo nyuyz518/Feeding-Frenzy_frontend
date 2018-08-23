@@ -7,23 +7,18 @@ document.addEventListener('DOMContentLoaded',() => {
   const submitButton = document.getElementById('submit-button')
   const existingUsers = document.getElementById("existing-users")
   const existingUsersBtn = document.getElementById("existing-users-button")
-
   start.style.display = "none"
-
   let score = 0
   let userName = ""
-
   scoreBoard.style.display = "none"
   userInput.style.display = ''
   submitButton.style.display = ''
-
   fetch("http://localhost:3000/api/v1/users").then(r=>r.json()).then(getUser)
     function getUser(data){
       data.forEach(user => {
         existingUsers.innerHTML += `<option id="${user.id}"> ${user.name} </option>`
       })
     }
-
   function setNewUser(){
     if(!userInput.value){
       alert("User name cant be empty!")
@@ -37,7 +32,6 @@ document.addEventListener('DOMContentLoaded',() => {
     }
     userInput.value = ''
   }
-
   function setExistingUser(){
     start.style.display = ""
     userName = existingUsers.value
@@ -46,33 +40,24 @@ document.addEventListener('DOMContentLoaded',() => {
     existingUsers.style.display = 'none'
     existingUsersBtn.style.display = 'none'
   }
-
   submitButton.addEventListener('click', (e) => {
     e.preventDefault()
     setNewUser()
   })
-
   existingUsersBtn.addEventListener('click', () => setExistingUser())
-
   function showBoard(){
     scoreBoard.innerHTML += `<li class="user-score">${userName}'s score: ${score}</li>`
   }
-
   const directionArray = ['top', 'bottom', 'left', 'right']
-
   function createFood(x, create, selectedDirection){
     if(2 < create){
       return
     }
-
     const food = document.createElement('div')
     food.className = "food"
     food.innerHTML = "<img src='image/burger.png' style='height:30px; width:30px'>"
-
-
     let top = 0
     container.appendChild(food)
-
     if(selectedDirection == 'top'){
       food.style.left = `${x}px`
       food.style.top = `${top}px`
@@ -92,7 +77,6 @@ document.addEventListener('DOMContentLoaded',() => {
       food.style.right = `${top}px`
       window.requestAnimationFrame(moveRight)
     }
-
     food.addEventListener('mouseover', (e) => {
       let chomp = new Audio('audio/animals_dog_eat_bone_short.mp3')
       chomp.play()
@@ -100,7 +84,6 @@ document.addEventListener('DOMContentLoaded',() => {
       score += 10
       // frown.removeEventListener('mouseover', moveSad)
     })
-
       function moveDown(){
         if(selectedDirection == 'top'){
           top += 7
@@ -112,7 +95,6 @@ document.addEventListener('DOMContentLoaded',() => {
             food.remove()
         }
       }
-
       function moveUp(){
         if(selectedDirection == 'bottom'){
           top += 7
@@ -124,7 +106,6 @@ document.addEventListener('DOMContentLoaded',() => {
             food.remove()
         }
       }
-
       function moveRight(){
         if(selectedDirection == 'left'){
           top += 7
@@ -136,7 +117,6 @@ document.addEventListener('DOMContentLoaded',() => {
             food.remove()
         }
       }
-
       function moveLeft(){
         if(selectedDirection == 'right'){
           top+=7
@@ -149,10 +129,7 @@ document.addEventListener('DOMContentLoaded',() => {
         }
       }
   }
-
   start.addEventListener('click', newGame)
-
-
   function newGame(){
     scoreBoard.style.display = ""
     input.style.display = 'none'
@@ -174,7 +151,6 @@ document.addEventListener('DOMContentLoaded',() => {
       }, 700)
       // debugger
       let top = 0
-
       container.appendChild(frown)
       frown.addEventListener('mouseover', (e) => {
         let beep = new Audio('audio/beep.mp3')
@@ -224,7 +200,6 @@ document.addEventListener('DOMContentLoaded',() => {
           }
         })
       })
-
       if(selectedDirection == 'top'){
         frown.style.left = `${x}px`
         frown.style.top = `${top}px`
@@ -244,7 +219,6 @@ document.addEventListener('DOMContentLoaded',() => {
         frown.style.right = `${top}px`
         window.requestAnimationFrame(moveRight)
       }
-
         function moveDown(){
           if(direction == 'top'){
             top+=5
@@ -256,7 +230,6 @@ document.addEventListener('DOMContentLoaded',() => {
               frown.remove()
           }
         }
-
         function moveUp(){
           if(direction == 'bottom'){
             top+=5
@@ -268,7 +241,6 @@ document.addEventListener('DOMContentLoaded',() => {
               frown.remove()
           }
         }
-
         function moveRight(){
           if(direction == 'left'){
               top+=5
@@ -280,7 +252,6 @@ document.addEventListener('DOMContentLoaded',() => {
               frown.remove()
           }
         }
-
         function moveLeft(){
           if(direction == 'right'){
             top+=5
@@ -293,7 +264,6 @@ document.addEventListener('DOMContentLoaded',() => {
           }
         }
       }
-
     let counter = 0
       let id = setInterval(function() {
         // container.removeChild(container.childNodes[0])
@@ -302,10 +272,8 @@ document.addEventListener('DOMContentLoaded',() => {
         // console.log(selectedDirection)
         let randSpawn = Math.floor(Math.random()*(1000 - 50))
         createSad(randSpawn, selectedDirection)
-
         let randomInt2 = Math.floor(Math.random()*directionArray.length)
         let selectedDirection2 = directionArray[randomInt2]
-
         let randFood = Math.floor(Math.random()*(1000 - 30))
         let chanceMake = Math.floor(Math.random()*10)
         createFood(randFood, chanceMake, selectedDirection2)
