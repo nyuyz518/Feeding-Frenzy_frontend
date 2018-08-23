@@ -128,21 +128,9 @@ document.addEventListener('DOMContentLoaded',() => {
       }
   }
 
-
-
-
-
-
-
-
-  //   container.innerHTML += "<div class='frown' id='frown" + i + "' style='top: -50px; left: " + x + "px;'><img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/sad.png'></div>"
-  //   i++
-  // }
-
   start.addEventListener('click', newGame)
 
   function newGame(){
-    // console.log("AHHHHHHHHHHHHHHHHHHHH")
     input.style.display = 'none'
     start.style.display = 'none'
 
@@ -154,11 +142,7 @@ document.addEventListener('DOMContentLoaded',() => {
       frown.innerHTML = "<img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/sad.png'>"
       // debugger
       let top = 0
-      // console.log("this is top")
-      // frown.style.left = `${x}px`
-      // let top = 0
-      // frown.style.top = `${top}px`
-      // debugger
+
       container.appendChild(frown)
       frown.addEventListener('mouseover', (e) => {
         clearInterval(id)
@@ -171,7 +155,6 @@ document.addEventListener('DOMContentLoaded',() => {
         }else{
           alert(userName + "'s SCORE IS " + score)
         }
-        // frown.removeEventListener('mouseover', moveSad)
       })
 
       if(selectedDirection == 'top'){
@@ -253,7 +236,6 @@ document.addEventListener('DOMContentLoaded',() => {
         // console.log(selectedDirection)
         let randSpawn = Math.floor(Math.random()*(1000 - 50))
         createSad(randSpawn, selectedDirection)
-
 
         let randomInt2 = Math.floor(Math.random()*directionArray.length)
         let selectedDirection2 = directionArray[randomInt2]
