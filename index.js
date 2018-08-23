@@ -131,6 +131,7 @@ document.addEventListener('DOMContentLoaded',() => {
   }
   start.addEventListener('click', newGame)
   function newGame(){
+    score = 0
     scoreBoard.style.display = ""
     input.style.display = 'none'
     start.style.display = 'none'
