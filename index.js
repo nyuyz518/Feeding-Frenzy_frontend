@@ -12,6 +12,14 @@ document.addEventListener('DOMContentLoaded',() => {
   let userName = ""
   //"jermaine"
   // input.querySelector('input').value
+  scoreBoard.style.display = "none"
+
+  //rearranges the scores doesnt work doe
+  // function rearrangeScores(){
+  //   debugger
+  //   scoreBoard.querySelectorAll('.user-score').sort((a,b) => (b-a))
+  // }
+
   function setUser(){
     if(!userInput.value){
       console.log(userInput.value)
@@ -33,7 +41,7 @@ document.addEventListener('DOMContentLoaded',() => {
 
 
   function showBoard(){
-    scoreBoard.innerHTML += `<li>${userName}: ${score}</li>`
+    scoreBoard.innerHTML += `<li class="user-score">${userName}'s score: ${score}</li>`
   }
 
   const directionArray = ['top', 'bottom', 'left', 'right']
@@ -130,10 +138,11 @@ document.addEventListener('DOMContentLoaded',() => {
 
   start.addEventListener('click', newGame)
 
+
   function newGame(){
+    scoreBoard.style.display = ""
     input.style.display = 'none'
     start.style.display = 'none'
-
     function createSad(x, selectedDirection){
       let direction = selectedDirection
       const frown = document.createElement('div')
@@ -145,16 +154,19 @@ document.addEventListener('DOMContentLoaded',() => {
 
       container.appendChild(frown)
       frown.addEventListener('mouseover', (e) => {
+        let beep = new Audio('audio/beep.mp3')
+        beep.play()
         clearInterval(id)
         container.innerHTML = ""
         start.style.display = ''
         input.style.display = ''
         showBoard()
         if(score < 200){
-          alert(userName + " IS TRASH LOL AMATEUR")
+          alert(userName + ", LOL AMATEUR")
         }else{
           alert(userName + "'s SCORE IS " + score)
         }
+        score = 0
       })
 
       if(selectedDirection == 'top'){

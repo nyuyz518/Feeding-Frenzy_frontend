@@ -3,12 +3,21 @@
   height: 650px;
   width: 1000px;
   z-index: 0;
+  top: 1em;
+  left: 4em;
   position: relative;
   display: block;
+  transistion:background 2s;
+  -webkit-transition:background 2s; /*safari/chrome*/
 }
 
 #container:hover{
+  background:lightpink;
   cursor: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/happy.png"), auto
+}
+
+#logo{
+  box-shadow: 0px 0px 2px 3px #0ff;
 }
 
 #show-scoreboard{
