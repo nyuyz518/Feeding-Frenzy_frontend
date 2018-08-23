@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded',() => {
   const userInput = document.getElementById('user-input')
   const submitButton = document.getElementById('submit-button')
   start.style.display = "none"
-
   let score = 0
   let userName = ""
 
@@ -176,7 +175,6 @@ document.addEventListener('DOMContentLoaded',() => {
             "user_id": 3
           })
         })
-        // score = 0
       })
 
       if(selectedDirection == 'top'){
