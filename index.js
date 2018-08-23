@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded',() => {
   const submitButton = document.getElementById('submit-button')
   start.style.display = "none"
 
-  let i = 1
+  // let i = 1
   let score = 0
   let userName = ""
 
