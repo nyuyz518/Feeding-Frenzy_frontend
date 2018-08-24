@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded',() => {
   const logout = document.getElementById('logout')
   const flavortown = new Audio('audio/flavortown.mp3')
 
-  const crySrc = '/Users/flatironschool/desktop/flatiron/mod3/mod-3-final/frontend/image/cry.png'
-  const sadSrc = '/Users/flatironschool/desktop/flatiron/mod3/mod-3-final/frontend/image/sad.png'
+  const crySrc = 'image/cry.png'
+  const sadSrc = 'image/sad.png'
   console.log(sadSrc)
   logout.addEventListener('click', () => {
     console.log('the click line 14 happened')
