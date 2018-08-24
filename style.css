@@ -32,6 +32,22 @@
   position: fixed;
 }
 
+#show-score{
+  color: red;
+  font-size: 30px;
+  text-align: center;
+  padding-right: 25px;
+}
+
+.flavortown {
+  color: red;
+  font-size: 30px;
+  text-align: center;
+  padding-right: 25px;
+  animation-name: spin;
+  animation-duration: 2s;
+}
+
 #play{
   float: center;
 }
@@ -96,4 +112,9 @@ li {
 @keyframes changeHeight{
   from{height:0px;}
   to{height:200px; margin: -50px;}
+}
+
+@keyframes spin{
+  from{transform: rotate(0deg);}
+  to{transform: rotate(360deg);}
 }

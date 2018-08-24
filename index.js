@@ -11,9 +11,10 @@ document.addEventListener('DOMContentLoaded',() => {
   const loser = document.getElementById('loser')
   const logout = document.getElementById('logout')
   const flavortown = new Audio('audio/flavortown.mp3')
-
   const crySrc = 'image/cry.png'
   const sadSrc = 'image/sad.png'
+  const currentScore = document.getElementById('show-score')
+
   console.log(sadSrc)
   logout.addEventListener('click', () => {
     console.log('the click line 14 happened')
@@ -27,6 +28,14 @@ document.addEventListener('DOMContentLoaded',() => {
   userInput.style.display = ''
   submitButton.style.display = ''
 
+  function spinScore(){
+    scoreBoard.classList.add('flavortown')
+    setTimeout(removeClass,2000)
+  }
+
+  function removeClass(){
+    scoreBoard.classList.remove('flavortown')
+  }
 
   logout.addEventListener('click', () => {
     console.log('the click line 14 happened')
@@ -83,7 +92,7 @@ document.addEventListener('DOMContentLoaded',() => {
   })
   existingUsersBtn.addEventListener('click', () => setExistingUser())
   function showBoard(){
-    scoreBoard.innerHTML = `<p id="showScore">${score}</p>`
+    scoreBoard.innerHTML = `<p id="show-score">Score: ${score}</p>`
   }
   const directionArray = ['top', 'bottom', 'left', 'right']
   function createFood(x, create, selectedDirection){
@@ -135,7 +144,7 @@ document.addEventListener('DOMContentLoaded',() => {
       function moveUp(){
         if(selectedDirection == 'bottom'){
           top += 7
-          food.style.bottom = `${top}px`
+          food.style.bottom = `${top -10}px`
         }
         if (top < 600) {
             window.requestAnimationFrame(moveUp)
@@ -203,7 +212,9 @@ document.addEventListener('DOMContentLoaded',() => {
     guy.addEventListener('mouseover',() => {
       guy.remove()
       flavortown.play()
+      spinScore()
       score = 0
+      showBoard()
     })
       function moveDown(){
         if(selectedDirection == 'top'){
@@ -254,8 +265,9 @@ document.addEventListener('DOMContentLoaded',() => {
 
   start.addEventListener('click', newGame)
   function newGame(){
-    let surprise = setInterval(createGuy, 1000)
     score = 0
+    showBoard()
+    let surprise = setInterval(createGuy, 1000)
     scoreBoard.style.display = ""
     input.style.display = 'none'
     start.style.display = 'none'
@@ -266,29 +278,25 @@ document.addEventListener('DOMContentLoaded',() => {
       frown.className = "frown"
       frown.innerHTML = "<img src='image/sad.png'>"
       setInterval(() => {
-        if(frown.querySelector('img').src = sadSrc){
-          frown.querySelector('img').src = crySrc
+        if(frown.querySelector('img').src == 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/sad.png'){
+          frown.querySelector('img').src = 'image/cry.png'
           frown.querySelector('img').style.height = '50px'
           frown.querySelector('img').style.width = '50px'
-        }else if (frown.querySelector('img').src = crySrc) {
-          frown.querySelector('img').src = sadSrc
-          frown.querySelector('img').style.height = '50px'
-          frown.querySelector('img').style.width = '50px'
+        }else{
+          frown.querySelector('img').src = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/sad.png'
         }
       }, 700)
       let top = 0
       container.appendChild(frown)
       frown.addEventListener('mouseover', (e) => {
+        score = 0
         let youLose = new Audio('audio/youLose.mp3')
         youLose.play()
         clearInterval(id)
         container.innerHTML = ""
         start.style.display = ''
         input.style.display = ''
-        if(score < 200){
-
-          container.innerHTML = `<div id='loser'><p>You Lose!</p></div>`
-        }
+        container.innerHTML = `<div id='loser'><p>You Lose!</p></div>`
         fetch("http://localhost:3000/api/v1/users")
         .then(r=>r.json())
         .then(data => {
