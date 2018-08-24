@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded',() => {
   const existingUsersBtn = document.getElementById("existing-users-button")
   const loser = document.getElementById('loser')
   const logout = document.getElementById('logout')
+  const flavortown = new Audio('audio/flavortown.mp3')
 
   const crySrc = '/Users/flatironschool/desktop/flatiron/mod3/mod-3-final/frontend/image/cry.png'
   const sadSrc = '/Users/flatironschool/desktop/flatiron/mod3/mod-3-final/frontend/image/sad.png'
@@ -164,8 +165,95 @@ document.addEventListener('DOMContentLoaded',() => {
         }
       }
   }
+
+  function createGuy(x, create, selectedDirection){
+    if(2 < create){
+      return
+    }
+    const guy = document.createElement('div')
+    guy.className = "guy"
+    guy.innerHTML = "<img src='image/guy_fieri.jpg' style='height:40px; width:40px'>"
+    let top = 0
+    if(selectedDirection == 'top'){
+      container.appendChild(guy)
+      guy.style.left = `${x}px`
+      guy.style.top = `${top}px`
+      window.requestAnimationFrame(moveDown)
+    }else if(selectedDirection == 'right'){
+      container.appendChild(guy)
+      x = x%600
+      guy.style.top = `${x}px`
+      guy.style.right = `${top -10}px`
+      window.requestAnimationFrame(moveLeft)
+    }else if(selectedDirection == 'bottom'){
+      container.appendChild(guy)
+      guy.style.right = `${x}px`
+      guy.style.bottom = `${top}px`
+      window.requestAnimationFrame(moveUp)
+    }else if(selectedDirection == 'left'){
+      container.appendChild(guy)
+      x = x%600
+      guy.style.bottom = `${x}px`
+      guy.style.right = `${top}px`
+      window.requestAnimationFrame(moveRight)
+    }
+    console.log(score)
+
+    guy.addEventListener('mouseover',() => {
+      guy.remove()
+      flavortown.play()
+      score = 0
+    })
+      function moveDown(){
+        if(selectedDirection == 'top'){
+          top += 7
+          guy.style.top = `${top}px`
+        }
+        if (top < 600) {
+            window.requestAnimationFrame(moveDown)
+          } else {
+            guy.remove()
+        }
+      }
+      function moveUp(){
+        if(selectedDirection == 'bottom'){
+          top += 7
+          guy.style.bottom = `${top}px`
+        }
+        if (top < 600) {
+            window.requestAnimationFrame(moveUp)
+          } else {
+            guy.remove()
+        }
+      }
+      function moveRight(){
+        if(selectedDirection == 'left'){
+          top += 7
+          guy.style.left = `${top}px`
+        }
+        if (top < 950) {
+            window.requestAnimationFrame(moveRight)
+          } else {
+            guy.remove()
+        }
+      }
+      function moveLeft(){
+        if(selectedDirection == 'right'){
+          top+=7
+          guy.style.right = `${top}px`
+        }
+        if (top < 950) {
+            window.requestAnimationFrame(moveLeft)
+          } else {
+            guy.remove()
+        }
+      }
+  }
+
+
   start.addEventListener('click', newGame)
   function newGame(){
+    let surprise = setInterval(createGuy, 1000)
     score = 0
     scoreBoard.style.display = ""
     input.style.display = 'none'
@@ -197,12 +285,7 @@ document.addEventListener('DOMContentLoaded',() => {
         start.style.display = ''
         input.style.display = ''
         showBoard()
-        if(score < 200){
           container.innerHTML = `<div id='loser'><p>You Lose!</p></div>`
-          //alert(userName + ", LOL AMATEUR!!!")
-        }else{
-          //alert(userName + "'s SCORE IS " + score)
-        }
         fetch("http://localhost:3000/api/v1/users")
         .then(r=>r.json())
         .then(data => {
@@ -317,7 +400,9 @@ document.addEventListener('DOMContentLoaded',() => {
         let selectedDirection2 = directionArray[randomInt2]
         let randFood = Math.floor(Math.random()*(1000 - 30))
         let chanceMake = Math.floor(Math.random()*10)
+        let chanceMake2 = Math.floor(Math.random()*100)
         createFood(randFood, chanceMake, selectedDirection2)
+        createGuy(randFood, chanceMake2, selectedDirection2)
         // let frowns = document.querySelectorAll('.frown')
         // console.log(frowns)
         counter++
