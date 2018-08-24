@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded',() => {
   const existingUsersBtn = document.getElementById("existing-users-button")
   const loser = document.getElementById('loser')
   const logout = document.getElementById('logout')
+
   const crySrc = '/Users/flatironschool/desktop/flatiron/mod3/mod-3-final/frontend/image/cry.png'
   const sadSrc = '/Users/flatironschool/desktop/flatiron/mod3/mod-3-final/frontend/image/sad.png'
   console.log(sadSrc)
@@ -100,7 +101,7 @@ document.addEventListener('DOMContentLoaded',() => {
     }else if(selectedDirection == 'right'){
       x = x%600
       food.style.top = `${x}px`
-      food.style.right = `${top}px`
+      food.style.right = `${top -10}px`
       window.requestAnimationFrame(moveLeft)
     }else if(selectedDirection == 'bottom'){
       food.style.right = `${x}px`
