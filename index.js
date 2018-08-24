@@ -290,7 +290,6 @@ document.addEventListener('DOMContentLoaded',() => {
       let top = 0
       container.appendChild(frown)
       frown.addEventListener('mouseover', (e) => {
-        score = 0
         let youLose = new Audio('audio/youLose.mp3')
         youLose.play()
         clearInterval(id)
