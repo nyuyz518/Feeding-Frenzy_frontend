@@ -7,23 +7,19 @@ document.addEventListener('DOMContentLoaded',() => {
   const submitButton = document.getElementById('submit-button')
   const existingUsers = document.getElementById("existing-users")
   const existingUsersBtn = document.getElementById("existing-users-button")
-<<<<<<< HEAD
   const loser = document.getElementById('loser')
   const logout = document.getElementById('logout')
-
-
+  const crySrc = '/Users/flatironschool/desktop/flatiron/mod3/mod-3-final/frontend/image/cry.png'
+  const sadSrc = '/Users/flatironschool/desktop/flatiron/mod3/mod-3-final/frontend/image/sad.png'
+  console.log(sadSrc)
   logout.addEventListener('click', () => {
     console.log('the click line 14 happened')
     location.reload()
   })
 
-=======
-  const logout = document.getElementById('logout')
->>>>>>> 9336debc27c769437d95f107aecfbb60d5a4b436
   start.style.display = "none"
   let score = 0
   let userName = ""
-  // scoreBoard.style.display = "none"
   userInput.style.display = ''
   submitButton.style.display = ''
 
@@ -121,7 +117,6 @@ document.addEventListener('DOMContentLoaded',() => {
       chomp.play()
       food.remove()
       score += 10
-      // frown.removeEventListener('mouseover', moveSad)
     })
       function moveDown(){
         if(selectedDirection == 'top'){
@@ -181,29 +176,31 @@ document.addEventListener('DOMContentLoaded',() => {
       frown.className = "frown"
       frown.innerHTML = "<img src='image/sad.png'>"
       setInterval(() => {
-        if(frown.querySelector('img').src = 'image/sad.png'){
-          frown.querySelector('img').src = 'image/cry.png'
+        if(frown.querySelector('img').src = sadSrc){
+          frown.querySelector('img').src = crySrc
           frown.querySelector('img').style.height = '50px'
           frown.querySelector('img').style.width = '50px'
-        }else{
-          frown.querySelector('img').src = 'image/sad.png'
+        }else if (frown.querySelector('img').src = crySrc) {
+          frown.querySelector('img').src = sadSrc
+          frown.querySelector('img').style.height = '50px'
+          frown.querySelector('img').style.width = '50px'
         }
       }, 700)
-      // debugger
       let top = 0
       container.appendChild(frown)
       frown.addEventListener('mouseover', (e) => {
-        let beep = new Audio('audio/beep.mp3')
-        beep.play()
+        let youLose = new Audio('audio/youLose.mp3')
+        youLose.play()
         clearInterval(id)
         container.innerHTML = ""
         start.style.display = ''
         input.style.display = ''
         showBoard()
         if(score < 200){
-          alert(userName + ", LOL AMATEUR!!!")
+          container.innerHTML = `<div id='loser'><p>You Lose!</p></div>`
+          //alert(userName + ", LOL AMATEUR!!!")
         }else{
-          alert(userName + "'s SCORE IS " + score)
+          //alert(userName + "'s SCORE IS " + score)
         }
         fetch("http://localhost:3000/api/v1/users")
         .then(r=>r.json())

@@ -67,9 +67,29 @@ li {
 }
 
 #loser{
-  vertical-align: middle;
+  left: 46%;
+  top: 35%;
   border-radius: 10px;
-  width: 200px;
-  height: 200px;
+  width: 0px;
+  height: 0px;
   background-color: white;
+  position: absolute;
+  animation-name: changeWidth, changeHeight;
+  animation-duration: 2s;
+}
+
+#loser > p {
+  position: relative;
+  top: 30%;
+  text-align: center;
+  font-size: 30px;
+}
+@keyframes changeWidth {
+  from {width: 0px; }
+  to {width: 200px; margin: -50px;}
+}
+
+@keyframes changeHeight{
+  from{height:0px;}
+  to{height:200px; margin: -50px;}
 }
