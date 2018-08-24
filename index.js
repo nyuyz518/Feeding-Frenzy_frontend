@@ -204,6 +204,7 @@ document.addEventListener('DOMContentLoaded',() => {
       guy.remove()
       flavortown.play()
       score = 0
+      showBoard()
     })
       function moveDown(){
         if(selectedDirection == 'top'){
@@ -256,6 +257,7 @@ document.addEventListener('DOMContentLoaded',() => {
   function newGame(){
     let surprise = setInterval(createGuy, 1000)
     score = 0
+    showBoard()
     scoreBoard.style.display = ""
     input.style.display = 'none'
     start.style.display = 'none'
