@@ -286,7 +286,9 @@ document.addEventListener('DOMContentLoaded',() => {
         start.style.display = ''
         input.style.display = ''
         if(score < 200){
+
           container.innerHTML = `<div id='loser'><p>You Lose!</p></div>`
+        }
         fetch("http://localhost:3000/api/v1/users")
         .then(r=>r.json())
         .then(data => {
