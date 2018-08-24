@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded',() => {
   const loser = document.getElementById('loser')
   const logout = document.getElementById('logout')
 
-  const crySrc = '/Users/flatironschool/desktop/flatiron/mod3/mod-3-final/frontend/image/cry.png'
-  const sadSrc = '/Users/flatironschool/desktop/flatiron/mod3/mod-3-final/frontend/image/sad.png'
+  const crySrc = 'image/cry.png'
+  const sadSrc = 'image/sad.png'
   console.log(sadSrc)
   logout.addEventListener('click', () => {
     console.log('the click line 14 happened')
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded',() => {
   })
   existingUsersBtn.addEventListener('click', () => setExistingUser())
   function showBoard(){
-    scoreBoard.innerHTML += `<li class="user-score">${userName}'s score: ${score}</li>`
+    scoreBoard.innerHTML = `<p id="showScore">${score}</p>`
   }
   const directionArray = ['top', 'bottom', 'left', 'right']
   function createFood(x, create, selectedDirection){
@@ -118,6 +118,7 @@ document.addEventListener('DOMContentLoaded',() => {
       chomp.play()
       food.remove()
       score += 10
+      showBoard()
     })
       function moveDown(){
         if(selectedDirection == 'top'){
@@ -196,7 +197,6 @@ document.addEventListener('DOMContentLoaded',() => {
         container.innerHTML = ""
         start.style.display = ''
         input.style.display = ''
-        showBoard()
         if(score < 200){
           container.innerHTML = `<div id='loser'><p>You Lose!</p></div>`
           //alert(userName + ", LOL AMATEUR!!!")
