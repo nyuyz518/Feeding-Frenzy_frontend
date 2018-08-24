@@ -7,6 +7,15 @@ document.addEventListener('DOMContentLoaded',() => {
   const submitButton = document.getElementById('submit-button')
   const existingUsers = document.getElementById("existing-users")
   const existingUsersBtn = document.getElementById("existing-users-button")
+  const loser = document.getElementById('loser')
+  const logout = document.getElementById('logout')
+
+
+  logout.addEventListener('click', () => {
+    console.log('the click line 14 happened')
+    location.reload()
+  })
+
   start.style.display = "none"
   let score = 0
   let userName = ""
@@ -78,7 +87,7 @@ document.addEventListener('DOMContentLoaded',() => {
       window.requestAnimationFrame(moveRight)
     }
     food.addEventListener('mouseover', (e) => {
-      let chomp = new Audio('audio/animals_dog_eat_bone_short.mp3')
+      let chomp = new Audio('audio/chomp.mp3')
       chomp.play()
       food.remove()
       score += 10
@@ -177,7 +186,7 @@ document.addEventListener('DOMContentLoaded',() => {
               body: JSON.stringify({
                 "name": userName
               })
-            })
+          })
             .then(r => r.json())
             .then(json => {
               fetch('http://localhost:3000/api/v1/games', {
@@ -222,7 +231,7 @@ document.addEventListener('DOMContentLoaded',() => {
       }
         function moveDown(){
           if(direction == 'top'){
-            top+=5
+            top+=4
             frown.style.top = `${top}px`
           }
           if (top < 600) {
@@ -233,7 +242,7 @@ document.addEventListener('DOMContentLoaded',() => {
         }
         function moveUp(){
           if(direction == 'bottom'){
-            top+=5
+            top+=4
             frown.style.bottom = `${top}px`
           }
           if (top < 600) {
@@ -244,7 +253,7 @@ document.addEventListener('DOMContentLoaded',() => {
         }
         function moveRight(){
           if(direction == 'left'){
-              top+=5
+              top+=4
               frown.style.left = `${top}px`
             }
           if (top < 950) {
@@ -255,7 +264,7 @@ document.addEventListener('DOMContentLoaded',() => {
         }
         function moveLeft(){
           if(direction == 'right'){
-            top+=5
+            top+=4
             frown.style.right = `${top}px`
           }
           if (top < 950) {
