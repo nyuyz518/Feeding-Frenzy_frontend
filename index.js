@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded',() => {
   const container = document.getElementById('container')
   const scoreBoard = document.getElementById('score-board')
+  const leaderBoard = document.getElementById('leader-board')
   const start = document.getElementById('play')
   const input = document.getElementById('user')
   const userInput = document.getElementById('user-input')
@@ -23,7 +24,7 @@ document.addEventListener('DOMContentLoaded',() => {
   start.style.display = "none"
   let score = 0
   let userName = ""
-  // scoreBoard.style.display = "none"
+  scoreBoard.style.display = "none"
   userInput.style.display = ''
   submitButton.style.display = ''
 
@@ -34,17 +35,15 @@ document.addEventListener('DOMContentLoaded',() => {
   })
 
   function allTimeHighScore(json) {
-    json.map(game => game.score)
-    .sort(
-      function(a, b) {
-          return b - a;
-      }
-    )
-    .slice(0, 10)
-    .forEach(score => {
-      const scoreLi = document.createElement('li')
-      scoreLi.innerText = `${json.find(game => game.score === score).user.name}'s score: ${score}`
-      scoreBoard.appendChild(scoreLi)
+    leaderBoard.innerHTML = ''
+    var sortable = []
+    json.forEach(game => sortable.push([game.user.name, game.score]))
+    sortable.sort(function(a, b) {
+        return b[1] - a[1];
+    })
+    const sorted = sortable.slice(0, 10)
+    sorted.forEach(arr => {
+      leaderBoard.innerHTML += `<li>${arr[0]}'s score: ${arr[1]}</li>`
     })
   }
 
@@ -239,6 +238,9 @@ document.addEventListener('DOMContentLoaded',() => {
             })
           }
         })
+        fetch("http://localhost:3000/api/v1/games")
+        .then(r=>r.json())
+        .then(allTimeHighScore)
       })
       if(selectedDirection == 'top'){
         frown.style.left = `${x}px`
