@@ -215,9 +215,6 @@ document.addEventListener('DOMContentLoaded',() => {
                 })
               })
             })
-            fetch("http://localhost:3000/api/v1/games")
-            .then(r=>r.json())
-            .then(allTimeHighScore)
           } else {
             fetch('http://localhost:3000/api/v1/games', {
               method: 'POST',
@@ -227,9 +224,6 @@ document.addEventListener('DOMContentLoaded',() => {
                 "user_id": user.id
               })
             })
-            fetch("http://localhost:3000/api/v1/games")
-            .then(r=>r.json())
-            .then(allTimeHighScore)
           }
         })
         fetch("http://localhost:3000/api/v1/games")
