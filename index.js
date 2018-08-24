@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded',() => {
   const submitButton = document.getElementById('submit-button')
   const existingUsers = document.getElementById("existing-users")
   const existingUsersBtn = document.getElementById("existing-users-button")
+<<<<<<< HEAD
   const loser = document.getElementById('loser')
   const logout = document.getElementById('logout')
 
@@ -16,12 +17,41 @@ document.addEventListener('DOMContentLoaded',() => {
     location.reload()
   })
 
+=======
+  const logout = document.getElementById('logout')
+>>>>>>> 9336debc27c769437d95f107aecfbb60d5a4b436
   start.style.display = "none"
   let score = 0
   let userName = ""
-  scoreBoard.style.display = "none"
+  // scoreBoard.style.display = "none"
   userInput.style.display = ''
   submitButton.style.display = ''
+
+
+  logout.addEventListener('click', () => {
+    console.log('the click line 14 happened')
+    location.reload()
+  })
+
+  function allTimeHighScore(json) {
+    json.map(game => game.score)
+    .sort(
+      function(a, b) {
+          return b - a;
+      }
+    )
+    .slice(0, 10)
+    .forEach(score => {
+      const scoreLi = document.createElement('li')
+      scoreLi.innerText = `${json.find(game => game.score === score).user.name}'s score: ${score}`
+      scoreBoard.appendChild(scoreLi)
+    })
+  }
+
+  fetch("http://localhost:3000/api/v1/games")
+  .then(r=>r.json())
+  .then(allTimeHighScore)
+
   fetch("http://localhost:3000/api/v1/users").then(r=>r.json()).then(getUser)
     function getUser(data){
       data.forEach(user => {
