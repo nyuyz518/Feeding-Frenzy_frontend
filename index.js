@@ -24,15 +24,14 @@ document.addEventListener('DOMContentLoaded',() => {
 
   function allTimeHighScore(json) {
     leaderBoard.innerHTML = ''
-    json.map(game => game.score)
-    .sort(
-      function(a, b) {
-          return b - a;
-      }
-    )
-    .slice(0, 10)
-    .forEach(score => {
-      leaderBoard.innerHTML += `<li>${json.find(game => game.score === score).user.name}'s score: ${score}</li>`
+    var sortable = []
+    json.forEach(game => sortable.push([game.user.name, game.score]))
+    sortable.sort(function(a, b) {
+        return b[1] - a[1];
+    })
+    const sorted = sortable.slice(0, 10)
+    sorted.forEach(arr => {
+      leaderBoard.innerHTML += `<li>${arr[0]}'s score: ${arr[1]}</li>`
     })
   }
 
@@ -233,6 +232,9 @@ document.addEventListener('DOMContentLoaded',() => {
             .then(allTimeHighScore)
           }
         })
+        fetch("http://localhost:3000/api/v1/games")
+        .then(r=>r.json())
+        .then(allTimeHighScore)
       })
       if(selectedDirection == 'top'){
         frown.style.left = `${x}px`
