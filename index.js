@@ -267,7 +267,10 @@ document.addEventListener('DOMContentLoaded',() => {
   function newGame(){
     score = 0
     showBoard()
+<<<<<<< HEAD
     let surprise = setInterval(createGuy, 1000)
+=======
+>>>>>>> e42a0ef3e5ac0266cc5b698dad8366826c6c9857
     scoreBoard.style.display = ""
     input.style.display = 'none'
     start.style.display = 'none'
