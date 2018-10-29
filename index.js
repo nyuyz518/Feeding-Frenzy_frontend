@@ -15,16 +15,15 @@ document.addEventListener('DOMContentLoaded',() => {
   const sadSrc = 'image/sad.png'
   const currentScore = document.getElementById('show-score')
 
-  console.log(sadSrc)
+  // TODO: how to understand the same code again in line 40-42?
   logout.addEventListener('click', () => {
-    console.log('the click line 14 happened')
+    //console.log('the click line 14 happened')
     location.reload()
   })
 
   start.style.display = "none"
   let score = 0
   let userName = ""
-
   userInput.style.display = ''
   submitButton.style.display = ''
 
@@ -38,7 +37,7 @@ document.addEventListener('DOMContentLoaded',() => {
   }
 
   logout.addEventListener('click', () => {
-    console.log('the click line 14 happened')
+    //console.log('the click line 14 happened')
     location.reload()
   })
 
@@ -56,15 +55,19 @@ document.addEventListener('DOMContentLoaded',() => {
   }
 
   fetch("http://localhost:3000/api/v1/games")
-  .then(r=>r.json())
-  .then(allTimeHighScore)
+    .then(r=>r.json())
+    .then(allTimeHighScore)
 
-  fetch("http://localhost:3000/api/v1/users").then(r=>r.json()).then(getUser)
-    function getUser(data){
+  function getUser(data){
       data.forEach(user => {
         existingUsers.innerHTML += `<option id="${user.id}"> ${user.name} </option>`
       })
     }
+
+  fetch("http://localhost:3000/api/v1/users")
+    .then(r=>r.json())
+    .then(getUser)
+
   function setNewUser(){
     if(!userInput.value){
       alert("User name cant be empty!")
@@ -78,6 +81,7 @@ document.addEventListener('DOMContentLoaded',() => {
     }
     userInput.value = ''
   }
+
   function setExistingUser(){
     start.style.display = ""
     userName = existingUsers.value
@@ -91,38 +95,43 @@ document.addEventListener('DOMContentLoaded',() => {
     setNewUser()
   })
   existingUsersBtn.addEventListener('click', () => setExistingUser())
+
   function showBoard(){
     scoreBoard.innerHTML = `<p id="show-score">Score: ${score}</p>`
   }
+
   const directionArray = ['top', 'bottom', 'left', 'right']
+
   function createFood(x, create, selectedDirection){
     if(2 < create){
       return
     }
     const food = document.createElement('div')
-    food.className = "food"
-    food.innerHTML = "<img src='image/burger.png' style='height:30px; width:30px'>"
-    let top = 0
-    container.appendChild(food)
-    if(selectedDirection == 'top'){
-      food.style.left = `${x}px`
-      food.style.top = `${top}px`
-      window.requestAnimationFrame(moveDown)
-    }else if(selectedDirection == 'right'){
-      x = x%600
-      food.style.top = `${x}px`
-      food.style.right = `${top -10}px`
-      window.requestAnimationFrame(moveLeft)
-    }else if(selectedDirection == 'bottom'){
-      food.style.right = `${x}px`
-      food.style.bottom = `${top}px`
-      window.requestAnimationFrame(moveUp)
-    }else if(selectedDirection == 'left'){
-      x = x%600
-      food.style.bottom = `${x}px`
-      food.style.right = `${top}px`
-      window.requestAnimationFrame(moveRight)
-    }
+      food.className = "food"
+      food.innerHTML = "<img src='image/burger.png' style='height:30px; width:30px'>"
+      let top = 0
+      container.appendChild(food)
+        if(selectedDirection == 'top'){
+          food.style.left = `${x}px`
+          food.style.top = `${top}px`
+          window.requestAnimationFrame(moveDown)
+          //
+        }else if(selectedDirection == 'right'){
+          x = x%600
+          food.style.top = `${x}px`
+          food.style.right = `${top -10}px`
+          window.requestAnimationFrame(moveLeft)
+        }else if(selectedDirection == 'bottom'){
+          food.style.right = `${x}px`
+          food.style.bottom = `${top}px`
+          window.requestAnimationFrame(moveUp)
+        }else if(selectedDirection == 'left'){
+          x = x%600
+          food.style.bottom = `${x}px`
+          food.style.right = `${top}px`
+          window.requestAnimationFrame(moveRight)
+        }
+
     food.addEventListener('mouseover', (e) => {
       let chomp = new Audio('audio/chomp.mp3')
       chomp.play()
@@ -275,14 +284,14 @@ document.addEventListener('DOMContentLoaded',() => {
     function createSad(x, selectedDirection){
       let direction = selectedDirection
       const frown = document.createElement('div')
-      console.log(selectedDirection)
+      //console.log(selectedDirection)
       frown.className = "frown"
       frown.innerHTML = "<img src='image/sad.png'>"
       setInterval(() => {
         if(frown.querySelector('img').src == 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/sad.png'){
-          frown.querySelector('img').src = 'image/cry.png'
-          frown.querySelector('img').style.height = '50px'
-          frown.querySelector('img').style.width = '50px'
+           frown.querySelector('img').src = 'image/cry.png'
+           frown.querySelector('img').style.height = '50px'
+           frown.querySelector('img').style.width = '50px'
         }else{
           frown.querySelector('img').src = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/sad.png'
         }
@@ -298,7 +307,7 @@ document.addEventListener('DOMContentLoaded',() => {
         input.style.display = ''
         container.innerHTML = `<div id='loser'><p>You Lose!</p></div>`
         fetch("http://localhost:3000/api/v1/users")
-        .then(r=>r.json())
+        .then(r => r.json())
         .then(data => {
           let user = data.find(user => userName === user.name)
           if (!user) {
@@ -331,10 +340,14 @@ document.addEventListener('DOMContentLoaded',() => {
             })
           }
         })
+
         fetch("http://localhost:3000/api/v1/games")
-        .then(r=>r.json())
-        .then(allTimeHighScore)
-      })
+          .then(r=>r.json())
+          .then(allTimeHighScore)
+      }) //end of mouseover frown event
+
+      // TODO: how to understand 351-414?
+
       if(selectedDirection == 'top'){
         frown.style.left = `${x}px`
         frown.style.top = `${top}px`
@@ -401,7 +414,6 @@ document.addEventListener('DOMContentLoaded',() => {
       }
     let counter = 0
       let id = setInterval(function() {
-        // container.removeChild(container.childNodes[0])
         let randomInt = Math.floor(Math.random()*directionArray.length)
         let selectedDirection = directionArray[randomInt]
         // console.log(selectedDirection)
@@ -419,4 +431,5 @@ document.addEventListener('DOMContentLoaded',() => {
         counter++
       }, 250)
   }
+
 })
