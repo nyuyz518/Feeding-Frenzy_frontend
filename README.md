@@ -1,4 +1,5 @@
-# Feeding-Frenzy is a single page game where avatar eats hamburgers for points and avoids enemies.
+# Feeding-Frenzy 
+a single page game where avatar eats hamburgers for points and avoids enemies.
 (frontend: JavaScript; backend: Ruby on Rails, PostgreSQL) 			
 
 1. used PostgreSQL database to persist user ID and scores in the backend. To start, run `rails s`
